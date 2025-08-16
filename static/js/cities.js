@@ -1,0 +1,25 @@
+// cities.js
+const CITIES = [
+    "Beograd", "Novi Sad", "Niš", "Kragujevac", "Subotica", "Kraljevo",
+    "Novi Pazar", "Zrenjanin", "Čačak", "Šabac", "Smederevo", "Valjevo",
+    "Vranje", "Sremska Mitrovica", "Loznica", "Sombor", "Užice", "Požarevac",
+    "Jagodina", "Stara Pazova", "Pirot", "Kikinda", "Ruma", "Bačka Palanka",
+    "Zaječar", "Paraćin", "Vršac", "Inđija", "Aleksinac", "Smederevska Palanka",
+    "Aranđelovac", "Bujanovac", "Bor", "Gornji Milanovac", "Prokuplje", "Vrbas",
+    "Trstenik", "Kula", "Velika Plana", "Preševo", "Tutin", "Prijepolje", "Bečej",
+    "Negotin", "Kovin", "Šid", "Ivanjica", "Bačka Topola", "Požega", 
+    "Petrovac na Mlavi", "Temerin", "Ub", "Vlasotince", "Knjaževac", "Ćuprija",
+    "Vrnjačka Banja", "Odžaci", "Bogatić", "Sjenica", "Žabalj", "Bajina Bašta",
+    "Priboj", "Apatin", "Aleksandrovac", "Raška", "Kovačica", "Kanjiža", "Svilajnac",
+    "Novi Bečej", "Topola", "Pećinci", "Despotovac", "Lebane", "Vladičin Han",
+    "Kladovo", "Alibunar", "Arilje", "Surdulica", "Lučani", "Doljevac", "Kuršumlija",
+    "Veliko Gradište", "Čajetina", "Majdanpek", "Bela Crkva", "Vladimirci", "Krupanj",
+    "Srbobran", "Varvarin", "Titel", "Beočin", "Lajkovac", "Žitorađa", "Brus", 
+    "Nova Varoš", "Žitište", "Ada", "Sokobanja", "Ljubovija", "Mionica", "Merošina", 
+    "Kučevo", "Knić", "Bački Petrovac", "Bač", "Mali Zvornik", "Koceljeva", "Svrljig", 
+    "Ljig", "Sečanj", "Boljevac", "Kosjerić", "Batočina", "Mali Iđoš", "Osečina", 
+    "Bela Palanka", "Žagubica", "Blace", "Bojnik", "Irig", "Žabari", "Babušnica", 
+    "Malo Crniće", "Plandište", "Novi Kneževac", "Čoka", "Nova Crnja", "Rekovac", 
+    "Dimitrovgrad", "Sremski Karlovci", "Ćićevac", "Ražanj", "Golubac", "Lapovo", 
+    "Medveđa", "Bosilegrad", "Gadžin Han", "Trgovište", "Crna Trava"
+];

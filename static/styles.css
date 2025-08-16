@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #152b3d; /* Blue color */
+    color: #fff; /* White text */
+    font-weight: 400;
+    font-size: 16px; /* Base font size */
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.btn-submit-review{
+    color: #abc7de;
+    background-color:#152b3d;
+    padding: 20px;
+    border-radius:10px;
+    text-align:center;
+    width:20%;
+    margin:20px auto;
+    font-size:18px;
+}
+.blue-box{
+    background-color: #abc7de;
+    color:#152b3d;
+    padding: 20px;
+    border-radius:10px;
+    text-align:center;
+    width:50%;
+    margin:20px auto;
+    font-size:18px;
+}
+.cleaners_box{
+    background-color: #abc7de;
+    color:#152b3d;
+    padding: 20px;
+    border-radius:10px;
+    text-align:left;
+    width:100%;
+    margin:20px auto;
+    font-size:18px;
+}
+.btn{
+    background-color: #abc7de;
+    color:#152b3d;
+    padding: 20px;
+    border-radius:10px;
+    text-align:center;
+    width:20%;
+    margin:20px auto;
+    font-size:18px;
+}
+head {
+    font-family: 'Poppins', sans-serif;
+}
+.header {
+    background-color: #152b3d;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size:50px;
+    font-weight:600;
+}
+
+.main{
+    background-color: #152b3d;
+    color: #fff;
+}
+.footer{
+    background-color: #152b3d;
+    color: #fff;
+}
+
+.navbar-logo {
+    max-height: 50px;
+    width: auto;
+}
+
+/* Adjust logo size on smaller screens */
+@media (max-width: 768px) {
+    .navbar-logo {
+        max-height: 40px;
+    }
+}
+
+.steps
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    color:#152b3d;
+}
+.step{
+    width: 250px;
+    background-color: #abc7de;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1;
+    min-width:200px;
+}
+.babyblue-line{
+    width: 100%;
+    height: 2px;
+    background-color:#abc7de;
+    margin: 20px 0;
+}
+#city_list {
+    position: absolute;
+    top: 100%;
+    width: 20%;
+    left:50%;
+    transform: translateX(-50%);
+    border: 1px solid #ccc;
+    max-height: 100px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding: 0;
+    background-color: #abc7de;
+    color:#152b3d;
+    z-index: 1000;
+    display:none;
+    border-radius:10px;
+}
+
+#city_list li {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#city_list li:hover {
+    background-color: #f0f0f0;
+}
+#city_input_wrapper {
+    position: relative; /* Makes the city input container a positioned element */
+    width: 100%;
+}
+
+#city_list.visible {
+    display: block; /* Show the list when it has items */
+}
+#register_btn.move-down {
+    margin-top: 100px;  /* Adjust the margin to move the button down */
+}
+/*BOOTSTRAP ISSUES
+/* Remove deprecated -webkit-text-size-adjust */
+body {
+    -webkit-text-size-adjust: 100%; /* Optional: for specific browsers */
+    text-size-adjust: 100%;         /* Standardize for other modern browsers */
+}
+
+/* Override deprecated text-align property */
+th {
+    text-align: inherit; /* Set text-align to inherit, if needed */
+}
+
+.toggle-comments-text {
+    font-weight: bold;
+    color:#152b3d;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+.toggle-comments-text:hover {
+    color: #152b3d; /* Change color on hover */
+}
+
+.form-row {
+    display: flex;
+    align-items: center; /* Vertikalno centriranje inputa i labela */
+    gap: 10px;           /* Razmak između label i input polja */
+    justify-content: flex-start;
+    max-width: 500px;    /* Po potrebi ograniči širinu */
+    margin: 10px auto;   /* Centriranje cele forme horizontalno */
+}
+
+.form-row label {
+    min-width: 150px;   /* Fiksna širina labela da poravnaš polja */
+    font-weight: 600;
+    color: #152b3d;     /* Tamnija boja za label */
+    text-align: right;  /* Poravnanje teksta labela na desno */
+}
+
+.form-row input,
+.form-row textarea {
+    flex: 1;            /* Polje zauzima ostatak prostora */
+    border-radius: 10px;
+    padding: 8px 12px;
+    border: 1px solid #abc7de;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #152b3d;
+    background-color: #fff;
+}
+
+.form-row textarea {
+    resize: vertical;  /* Dozvoli vertikalno resize ako želiš */
+}
+
+/* Dugme ostaje kako je, možeš ga srediti da bude u istom stilu */
+.btn-submit-review {
+    color: #abc7de;
+    background-color: #152b3d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 20%;
+    margin: 20px auto;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+.btn-submit-review:hover {
+    background-color: #abc7de;
+}
+.btn-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+
+

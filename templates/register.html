@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="header" style="color: #abc7de;" >
+        Register
+    </h1>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <a>Username:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <a>Password:</a>
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <a>Confirm password:</a>
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirmation" type="password">
+        </div>
+        <div class="mb-3">
+            <a>Name:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="name" placeholder="Name" type="text">
+        </div>
+        <div class="mb-3">
+            <a>Surname:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="surname" placeholder="Surname" type="text">
+        </div>
+        <div class="mb-3">
+            <a>Email:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email" type="text">
+        </div>
+        <label for="user_type">Are you a customer or cleaner?</label><br>
+        <input type="radio" id="customer" name="user_type" value="customer" required>
+        <label for="customer">Customer</label><br>
+        <input type="radio" id="cleaner" name="user_type" value="cleaner" required>
+        <label for="cleaner">Cleaner</label><br>
+        <br>
+        <div class="mb-3">
+            <a>City:</a>
+            <div id="city_input_wrapper">
+                <input autocomplete="off" class="form-control mx-auto w-auto" id="city_input" name="city_input" placeholder="City(Only in Serbia):" type="text">
+                <ul id="city_list"></ul>
+            </div>
+        </div>
+        <button class="btn" id="register_btn" type="submit">Register</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/cities.js') }}"></script>
+        <script>
+            let input = document.getElementById('city_input');
+            let city_list=document.getElementById('city_list');
+            let register_btn = document.getElementById('register_btn');
+            input.addEventListener('keyup', function(event) {
+                let html = '';
+                if (input.value) {
+                    for (city of CITIES) {
+                        if (city.toLowerCase().startsWith(input.value.toLowerCase())) {
+                            html += `<li>${city}</li>`;
+                        }
+                    }
+                }
+                // If there are matching cities, show the list
+            if (html) {
+                city_list.innerHTML = html;
+                city_list.classList.add('visible');  // Show the list
+                register_btn.classList.add('move-down'); 
+            } else {
+                city_list.innerHTML = '';  // Clear the list
+                city_list.classList.remove('visible');  // Hide the list
+                register_btn.classList.remove('move-down'); 
+            }
+        });
+            // Add click event listener to list items
+            city_list.addEventListener('click', function(event) {
+                if (event.target.tagName === 'LI') {
+                    input.value = event.target.innerText;  // Set the value of the input to the clicked city
+                    city_list.innerHTML = '';  // Clear the list after selection
+                    city_list.classList.remove('visible'); 
+                    register_btn.classList.remove('move-down');
+                }
+            });
+
+        </script>
+{% endblock %}

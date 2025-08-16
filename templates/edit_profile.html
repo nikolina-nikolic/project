@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="header" style="color: #abc7de" >
+        Edit Profile
+    </h1>
+    <form action="/edit_profile" method="post">
+        <div class="mb-3">
+            <a>Username:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" type="text" value="{{ user[1] }}" required>
+        </div>
+        <div class="mb-3">
+            <a>Name:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="name" type="text" value="{{ user[2] }}" required>
+        </div>
+        <div class="mb-3">
+            <a>Surname:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="surname" type="text" value="{{ user[3] }}" required>
+        </div>
+        <div class="mb-3">
+            <a>Email:</a>
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" type="text" value="{{ user[4] }}" required>
+        </div>
+        <div class="mb-3">
+            <a>User type:</a><br>
+            <input type="radio" id="customer" name="user_type" value="customer" {% if user[6] == 'customer' %}checked{% endif %} required>
+            <label for="customer">Customer</label><br>
+            <input type="radio" id="cleaner" name="user_type" value="cleaner"  {% if user[6] == 'cleaner' %}checked{% endif %} required>
+            <label for="cleaner">Cleaner</label><br>
+        </div>
+        <br>
+        <div class="mb-3">
+            <a>City:</a>
+            <div id="city_input_wrapper">
+                <input autocomplete="off" class="form-control mx-auto w-auto" id="city_input" name="city_input" type="text" value="{{ user[9] }}" required >
+                <ul id="city_list"></ul>
+            </div>
+        </div>
+        {% if user[6] == 'cleaner' %}
+            <div class="mb-3">
+                <a>Phone:</a>
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="phone" type="text" value="{{ user[7] }}" required>
+            </div>
+            <div class="mb-3">
+                <a>Description:</a>
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="description" type="text" value="{{ user[8] }}" required>
+            </div>
+        {% endif %}
+        <button class="btn" id="save_changes_btn" type="submit">Save changes</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/cities.js') }}"></script>
+        <script>
+            let input = document.getElementById('city_input');
+            let city_list=document.getElementById('city_list');
+            let register_btn = document.getElementById('register_btn');
+            input.addEventListener('keyup', function(event) {
+                let html = '';
+                if (input.value) {
+                    for (city of CITIES) {
+                        if (city.toLowerCase().startsWith(input.value.toLowerCase())) {
+                            html += `<li>${city}</li>`;
+                        }
+                    }
+                }
+                // If there are matching cities, show the list
+            if (html) {
+                city_list.innerHTML = html;
+                city_list.classList.add('visible');  // Show the list
+                register_btn.classList.add('move-down'); 
+            } else {
+                city_list.innerHTML = '';  // Clear the list
+                city_list.classList.remove('visible');  // Hide the list
+                register_btn.classList.remove('move-down'); 
+            }
+        });
+            // Add click event listener to list items
+            city_list.addEventListener('click', function(event) {
+                if (event.target.tagName === 'LI') {
+                    input.value = event.target.innerText;  // Set the value of the input to the clicked city
+                    city_list.innerHTML = '';  // Clear the list after selection
+                    city_list.classList.remove('visible'); 
+                    register_btn.classList.remove('move-down');
+                }
+            });
+
+        </script>
+
+        <br>
+    <a href="{{ url_for('my_profile')}}" class="btn">Back to my profile</a>
+
+
+{%endblock%}

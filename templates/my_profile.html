@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="header" style="color: #abc7de" >
+        My Profile
+    </h1>
+    <div class="profile_info">
+        <p><strong> Username: </strong>{{ user.username }}</p>
+        <hr class="babyblue-line">
+        <p><strong> Name: </strong>{{ user.name }}</p>
+        <hr class="babyblue-line">
+        <p><strong> Surname: </strong>{{ user.surname }}</p>
+        <hr class="babyblue-line">
+        <p><strong> Email: </strong>{{ user.email }}</p>
+        <hr class="babyblue-line">
+        <p><strong> User type: </strong>{{ user.user_type }}</p>
+        <hr class="babyblue-line">
+        <p><strong> City: </strong>{{ user.city_input }}</p>
+        <hr class="babyblue-line">
+        {% if user.user_type=='cleaner' %}
+            <div>
+                    <p><strong> Phone number: </strong>{{ user.phone }}</p>
+                    <hr class="babyblue-line">
+                    <p><strong> Description: </strong>{{ user.description }}</p>
+                    <hr class="babyblue-line">
+                <hr class="babyblue-line">
+                <h2 style="color: #abc7de"> My Reviews</h2>
+                <h3 style="color: #abc7de"><strong>Average Rating:</strong> {{avg_rating}} / 5 ({{review_count}} reviews)</h3>
+                <br>
+                {% if reviews %}
+                {% for review in reviews %}
+                    <div >
+                        <div class="comment">
+                                <p><strong>{{ review.reviewer_username }} : </strong> {{review.rating}}/5</p>
+                                <p> {{review.comment }}</p>
+                                <hr style="color: gray">
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+        <a href="{{ url_for('edit_profile') }}" class="btn"> Edit profile</a>
+        <br>
+        <br>
+    </div>
+
+
+{%endblock%}

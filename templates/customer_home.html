@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h1 class="header" style="color: #abc7de" >
+        You are just one step away from finding your perfect cleaner!
+    </h1>
+    {% if cleaners_info %}
+        <div class="list_of_cleaners">
+            {% for cleaner_data in cleaners_info %}
+                <div class="cleaners_box">
+                    <h2><strong>{{ cleaner_data.cleaner.username }}</strong></h2>
+                    <p><strong>Name:</strong> {{ cleaner_data.cleaner.name }}  {{ cleaner_data.cleaner.surname }}</p>
+                    <p><strong>Email:</strong> {{ cleaner_data.cleaner.email }} </p>
+                    <p><strong>Phone: </strong> {{ cleaner_data.cleaner.phone }} </p>
+                    <p><strong>Description:</strong> {{ cleaner_data.cleaner.description }} </p>
+                    <p><strong>Average Rating: </strong> {{ cleaner_data.avg_rating }}/5.0 ( {{cleaner_data.review_count}} reviews )</p>
+                    <p class="toggle-comments-text" style="cursor:pointer; color:#152b3d; text-decoration: underline;">
+                        Latest comments
+                    </p> 
+                    <div class="comments" style="display:none;"  >
+                        {% if cleaner_data.initial_reviews %}
+                            {% for review in cleaner_data.initial_reviews %}
+                                <div class="comment">
+                                    <p><strong>{{ review.reviewer_username }} : </strong> {{review.rating}}/5</p>
+                                    <p> {{review.comment }}</p>
+                                    <hr>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p> No comments yet. </p>
+                        {% endif %}
+                    </div>
+                    <hr>
+                    {% if session.get('user_id') %}
+                        <form action="leave_review" method="POST" class="leave_review_form">
+                            <input type="hidden" name="cleaner_id" value="{{cleaner_data.cleaner.id}}">
+                            <div class="mb-2 form-row" >
+                                <label for="rating">Rating(1 to 5): </label>
+                                <input type="number" class="form-control mx-auto w-auto" name="rating" min="1" max="5" required>
+                            </div>
+                            <div class="mb-2 form-row" >
+                                <label for="comment">Comment: </label>
+                                <textarea name="comment" class="form-control mx-auto w-auto" required> </textarea>
+                            </div>
+                             <div class="btn-wrapper">
+                                <button type="submit" class="btn-submit-review">Submit Review</button>
+                             </div>
+                            
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p> No available cleaners in your area yet. Please check later for more details.</p>
+        <br>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                document.querySelectorAll(".toggle-comments-text").forEach(function(textLink){
+                    textLink.addEventListener("click", function(){
+                        const commentsSection = textLink.nextElementSibling;
+                        if(commentsSection.style.display === "none" || commentsSection.style.display === ""){
+                            commentsSection.style.display = "block";
+                            textLink.textContent = "Hide comments";
+                        } else {
+                            commentsSection.style.display = "none";
+                            textLink.textContent = "Latest comments";
+                        }
+                    });
+                });
+            });
+        </script>
+{% endblock %}
