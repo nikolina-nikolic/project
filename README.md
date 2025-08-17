@@ -103,7 +103,7 @@ It uses two dynamic variables: top (a short error code or title) and bottom (a d
 The page provides a clean, centered layout and includes a button that takes the user back to the homepage.  \
 
 ## Developer's personal touch
-My name is Nikolina Nikolić and I am from Serbia. As a young woman, I am aware of the challenges I will face in the future. I am driven by a strong desire to contribute to society through my knowledge, education, and creativity. Whenever I see that my ideas have the potential to help or inspire others, my motivation only grows stronger.\
+My name is Nikolina Nikolić, I am 18 years old and I come from Serbia. As a young woman, I am aware of the challenges I will face in the future. I am driven by a strong desire to contribute to society through my knowledge, education, and creativity. Whenever I see that my ideas have the potential to help or inspire others, my motivation only grows stronger.\
 Everyone talks about work-life balance, but how can it truly be achieved when there is constant pressure and stress on both sides? Serbian market is facing a huge difficulty: the lack of easily accessible and reliable household services. This web application is my way of making a positive difference in people’s everyday lives.
 I believe technology offers unlimited opportunities, and I am passionate about leveraging it to improve society’s well-being and create real, meaningful change.\
 I hope that my web application will become long-term sustainable platform which can expand to other countries and provide more services.

@@ -17,7 +17,7 @@
                     <p class="toggle-comments-text" style="cursor:pointer; color:#152b3d; text-decoration: underline;">
                         Latest comments
                     </p> 
-                    <div class="comments" style="display:none;"  >
+                    <div class="comments" style="display:none;" id="reviews-container-{{ cleaner_data.cleaner.id }}">
                         {% if cleaner_data.initial_reviews %}
                             {% for review in cleaner_data.initial_reviews %}
                                 <div class="comment">
@@ -29,6 +29,16 @@
                         {% else %}
                             <p> No comments yet. </p>
                         {% endif %}
+                           {% if cleaner_data.review_count > 5 %}
+                                <p 
+                                    class="load-more-comments" 
+                                    data-cleaner-id="{{ cleaner_data.cleaner.id }}" 
+                                    data-offset="5"
+                                    style="cursor:pointer; color:#152b3d; text-decoration: underline; font-weight: bold; margin-top: 5px;"
+                                >
+                                    Load more comments
+                                </p>
+                            {% endif %}
                     </div>
                     <hr>
                     {% if session.get('user_id') %}
@@ -58,20 +68,64 @@
 {% endblock %}
 
 {% block scripts %}
-        <script>
-            document.addEventListener("DOMContentLoaded", function(){
-                document.querySelectorAll(".toggle-comments-text").forEach(function(textLink){
-                    textLink.addEventListener("click", function(){
-                        const commentsSection = textLink.nextElementSibling;
-                        if(commentsSection.style.display === "none" || commentsSection.style.display === ""){
-                            commentsSection.style.display = "block";
-                            textLink.textContent = "Hide comments";
-                        } else {
-                            commentsSection.style.display = "none";
-                            textLink.textContent = "Latest comments";
-                        }
-                    });
-                });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Toggle show/hide for comments
+        document.querySelectorAll(".toggle-comments-text").forEach(function (textLink) {
+            textLink.addEventListener("click", function () {
+                const commentsSection = textLink.nextElementSibling;
+                if (commentsSection.style.display === "none" || commentsSection.style.display === "") {
+                    commentsSection.style.display = "block";
+                    textLink.textContent = "Hide comments";
+                } else {
+                    commentsSection.style.display = "none";
+                    textLink.textContent = "Latest comments";
+                }
             });
-        </script>
+        });
+
+        // Load more comments (styled as text link, not button)
+        document.querySelectorAll(".load-more-comments").forEach(function (link) {
+            link.addEventListener("click", function () {
+                const cleanerId = this.dataset.cleanerId;
+                let offset = parseInt(this.dataset.offset);
+                const reviewsContainer = document.getElementById(`reviews-container-${cleanerId}`);
+
+                this.textContent = "Loading...";
+
+                fetch(`/load_more_comments/${cleanerId}/${offset}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            this.textContent = "No more comments";
+                            this.style.pointerEvents = "none";
+                            this.style.color = "grey";
+                            return;
+                        }
+
+                        data.forEach(comment => {
+                            const div = document.createElement("div");
+                            div.classList.add("comment");
+                            div.innerHTML = `
+                                <p><strong>${comment.reviewer_username}:</strong> ${comment.rating}/5</p>
+                                <p>${comment.comment}</p>
+                                <hr>
+                            `;
+                            // Insert above the "load more" link
+                            reviewsContainer.insertBefore(div, this);
+                        });
+
+                        offset += data.length;
+                        this.dataset.offset = offset;
+                        this.textContent = "Load more comments";
+                    })
+                    .catch(error => {
+                        console.error("Error loading comments:", error);
+                        this.textContent = "Error loading more.";
+                    });
+            });
+        });
+    });
+</script>
+
 {% endblock %}
